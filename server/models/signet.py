@@ -16,14 +16,18 @@ class Signet(Base):
     url = Column(URLType)
     position = Column(Integer)
 
+    @property
+    def get_url(self):
+        return str(self.url)
+
     def __repl__(self):
-        return f'id: {self.signet_id}, url: {self.url.url}'
+        return f'id: {self.signet_id}, url: {self.get_url}'
 
     __str__ = __repl__
 
     def serialize(self):
         return {
             'signet_id': self.signet_id,
-            'url': self.url.url,
+            'url': self.get_url,
             'position': self.position,
         }
