@@ -12,13 +12,13 @@ class SignetView:
         resp.status_code = api.status_codes.HTTP_200
 
     async def on_post(self, req, resp):
-        data = await req.media()
+        data = await req.media(format='json')
         print(data)
         resp.media = {'message': 'on_post'}
         resp.status_code = api.status_codes.HTTP_201
 
     async def on_delete(self, req, resp):
-        data = await req.media()
+        data = await req.media(format='json')
         print(data)
         resp.media = {'message': 'on_delete'}
         resp.status_code = api.status_codes.HTTP_202
