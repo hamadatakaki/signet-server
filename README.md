@@ -15,4 +15,3 @@
 2. APIへアクセス.
 
 [localhost:8000/hello](http://localhost:8000/hello)にブラウザからアクセスし動作を確認する.
-
