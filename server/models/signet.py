@@ -46,5 +46,5 @@ class Signet(Base):
             'title': self.title,
             'comment': self.comment,
             'position': self.position,
-            'created_at': self.created_at
+            'created_at': str(self.created_at)
         }

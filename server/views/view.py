@@ -8,7 +8,10 @@ import json
 @api.route('/signets')
 class SignetView:
     def on_get(self, req, resp):
-        resp.media = {'message': 'on_get'}
+        # query signet's table.
+        with SessionManager() as session:
+            signets = session.query(Signet).all()
+        resp.media = {'signets': [s.serialize() for s in signets]}
         resp.status_code = api.status_codes.HTTP_200
 
     async def on_post(self, req, resp):
