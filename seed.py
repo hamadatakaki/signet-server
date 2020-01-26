@@ -13,7 +13,7 @@ if __name__=='__main__':
         ),
         Signet(
             url="https://onsen-musume.jp/character/iizaka_mahiro", 
-            icon="onsen-musume.jp/wp/wp-content/themes/onsenmusume/pc/assets/img/siteinfo/favicon.ico",
+            icon="https://onsen-musume.jp/wp/wp-content/themes/onsenmusume/pc/assets/img/siteinfo/favicon.ico",
             title="飯坂真尋 | 温泉むすめ公式サイト", comment="飯坂温泉行きたい", position=3456
         ),
         Signet(url="https://jellyfishrumble.net", icon="", title="jellyfishrumble.net", comment="クソサイトですまん...", position=450),

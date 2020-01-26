@@ -16,12 +16,25 @@ class SignetView:
 
     async def on_post(self, req, resp):
         data = await req.media(format='json')
-        print(data)
-        resp.media = {'message': 'on_post'}
+        if not ('url' in data.keys() and 'position' in data.keys()):
+            resp.media = {'message': 'bad request'}
+            resp.status_code = api.status_codes.HTTP_301
+            return
+        signet = Signet(url=data['url'], icon="", title="", comment="", position=data['position'])
+        with SessionManager() as session:
+            session.add(signet)
+            session.commit() 
+        resp.media = {'message': 'on post'}
         resp.status_code = api.status_codes.HTTP_201
 
     async def on_delete(self, req, resp):
         data = await req.media(format='json')
-        print(data)
-        resp.media = {'message': 'on_delete'}
+        if 'signet_id' not in data.keys():
+            resp.media =  {'message': 'bad request'}
+            resp.status_code = api.status_codes.HTTP_301
+            return
+        with SessionManager() as session:
+            session.query(Signet).filter(Signet.signet_id==data['signet_id']).delete()
+            session.commit()
+        resp.media = {'message': 'on delete'}
         resp.status_code = api.status_codes.HTTP_202
