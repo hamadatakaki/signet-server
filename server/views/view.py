@@ -23,7 +23,8 @@ class SignetView:
         signet = Signet(url=data['url'], icon="", title="", comment="", position=data['position'])
         with SessionManager() as session:
             session.add(signet)
-            session.commit() 
+            session.commit()
+        # TODO: 保存したWebページのtitleとiconのURLを取ってくるバックグラウンド処理を行う.
         resp.media = {'message': 'on post'}
         resp.status_code = api.status_codes.HTTP_201
 
