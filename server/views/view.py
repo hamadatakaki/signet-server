@@ -20,7 +20,7 @@ class SignetView:
             resp.media = {'message': 'bad request'}
             resp.status_code = api.status_codes.HTTP_301
             return
-        signet = Signet(url=data['url'], icon="", title="", comment="", position=data['position'])
+        signet = Signet(url=data['url'], icon=data['icon'], title=data['title'], comment="", position=data['position'])
         with SessionManager() as session:
             session.add(signet)
             session.commit()
