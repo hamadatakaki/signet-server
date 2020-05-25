@@ -16,7 +16,7 @@ class SignetView:
 
     async def on_post(self, req, resp):
         data = await req.media(format='json')
-        if not ('url' in data.keys() and 'position' in data.keys()):
+        if not ('url' in data.keys() and 'position' in data.keys() and 'icon' in data.keys() and 'title' in data.keys()):
             resp.media = {'message': 'bad request'}
             resp.status_code = api.status_codes.HTTP_301
             return
@@ -24,7 +24,6 @@ class SignetView:
         with SessionManager() as session:
             session.add(signet)
             session.commit()
-        # TODO: 保存したWebページのtitleとiconのURLを取ってくるバックグラウンド処理を行う.
         resp.media = {'message': 'on post'}
         resp.status_code = api.status_codes.HTTP_201
 
@@ -39,3 +38,19 @@ class SignetView:
             session.commit()
         resp.media = {'message': 'on delete'}
         resp.status_code = api.status_codes.HTTP_202
+
+
+@api.route('/signets/comment')
+class SignetCommentView:
+    async def on_post(self, req, resp):
+        data = await req.media(format='json')
+        if not ('signet_id' in data.keys() and 'comment' in data.keys()):
+            resp.media =  {'message': 'bad request'}
+            resp.status_code = api.status_codes.HTTP_301
+            return
+        with SessionManager() as session:
+            sig = session.query(Signet).get(data['signet_id'])
+            sig.comment = data['comment']
+            session.commit()
+        resp.media = {'message': 'on post'}
+        resp.status_code = api.status_codes.HTTP_201
