@@ -11,7 +11,7 @@ _default_db_data = {
     'name':  'CADB'
 }
 
-def get_db_setting(defaults=_default_db_data):
+def get_db_setting(default=_default_db_data):
     DATABASE = {
         'dbms': 'postgresql',
         'driver': 'psycopg2',
@@ -29,6 +29,6 @@ def get_db_setting(defaults=_default_db_data):
         if envkey in os.environ:
             DATABASE[dictkey] = os.environ[envkey]
         else:
-            DATABASE[dictkey] = defaults[dictkey]
+            DATABASE[dictkey] = default[dictkey]
 
     return DATABASE

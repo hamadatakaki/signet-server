@@ -5,7 +5,7 @@ from server.models.signet import Signet
 import json
 
 
-@api.route('/signets')
+@api.route('/api/signet')
 class SignetView:
     def on_get(self, req, resp):
         # query signet's table.
@@ -40,7 +40,7 @@ class SignetView:
         resp.status_code = api.status_codes.HTTP_202
 
 
-@api.route('/signets/comment')
+@api.route('/api/signet/comment')
 class SignetCommentView:
     async def on_post(self, req, resp):
         data = await req.media(format='json')
