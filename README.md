@@ -7,7 +7,7 @@
 ```
 > docker-compose up -d db
 > docker-compose up -d app
-> docker-compose exec app /bin/bash
+> docker-compose exec app bash
 >> python3 seed.py
 >> python3 app.py
 ```
