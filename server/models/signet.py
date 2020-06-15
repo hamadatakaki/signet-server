@@ -1,6 +1,7 @@
 from . import Base
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy.sql.functions import current_timestamp
 from sqlalchemy_utils import URLType
 from furl import furl
 
@@ -14,14 +15,26 @@ class Signet(Base):
         autoincrement=True
     )
     url = Column(URLType)
+    icon = Column(URLType)
+    title = Column(String(32))
+    comment = Column(String(140))
     position = Column(Integer)
+    created_at = Column(
+        DateTime,
+        nullable=False,
+        server_default=current_timestamp()
+    )
 
     @property
     def get_url(self):
         return str(self.url)
 
+    @property
+    def get_icon(self):
+        return str(self.icon)
+
     def __repl__(self):
-        return f'id: {self.signet_id}, url: {self.get_url}'
+        return f'<id: {self.signet_id}, url: {self.get_url}>'
 
     __str__ = __repl__
 
@@ -29,5 +42,9 @@ class Signet(Base):
         return {
             'signet_id': self.signet_id,
             'url': self.get_url,
+            'icon': self.get_icon,
+            'title': self.title,
+            'comment': self.comment,
             'position': self.position,
+            'created_at': str(self.created_at)
         }

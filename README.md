@@ -7,12 +7,11 @@
 ```
 > docker-compose up -d db
 > docker-compose up -d app
-> docker-compose exec app /bin/bash
+> docker-compose exec app bash
 >> python3 seed.py
 >> python3 app.py
 ```
 
 2. APIへアクセス.
 
-[localhost:8000/hello](http://localhost:8000/hello)にブラウザからアクセスし動作を確認する.
-
+[localhost:8000](http://localhost:8000)にブラウザからアクセスし動作を確認する.
