@@ -17,14 +17,15 @@ class SignetView:
     async def on_post(self, req, resp):
         data = await req.media(format='json')
         if not ('url' in data.keys() and 'position' in data.keys() and 'icon' in data.keys() and 'title' in data.keys()):
-            resp.media = {'message': 'bad request'}
+            resp.media = {'message': 'bad request','signet_id': -1}
             resp.status_code = api.status_codes.HTTP_301
             return
         signet = Signet(url=data['url'], icon=data['icon'], title=data['title'], comment="", position=data['position'])
         with SessionManager() as session:
             session.add(signet)
             session.commit()
-        resp.media = {'message': 'on post'}
+            signet_id = signet.signet_id
+        resp.media = {'message': 'on post', 'signet_id': signet_id}
         resp.status_code = api.status_codes.HTTP_201
 
     async def on_delete(self, req, resp):
