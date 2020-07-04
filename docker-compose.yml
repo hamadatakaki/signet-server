@@ -10,7 +10,7 @@ services:
       - 15432:5432
     volumes:
       - ./conf/db/init:/docker-entrypoint-initdb.d
-      - ./log/db/data:/var/lib/postgresql/data
+      - ./log/db:/var/lib/postgresql
 
   # web:
   #   image: nginx:latest

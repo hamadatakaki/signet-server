@@ -18,7 +18,7 @@ class SignetView:
         data = await req.media(format='json')
         if not ('url' in data.keys() and 'position' in data.keys() and 'icon' in data.keys() and 'title' in data.keys()):
             resp.media = {'message': 'bad request','signet_id': -1}
-            resp.status_code = api.status_codes.HTTP_301
+            resp.status_code = api.status_codes.HTTP_400
             return
         signet = Signet(url=data['url'], icon=data['icon'], title=data['title'], comment="", position=data['position'])
         with SessionManager() as session:
@@ -32,7 +32,7 @@ class SignetView:
         data = await req.media(format='json')
         if 'signet_id' not in data.keys():
             resp.media =  {'message': 'bad request'}
-            resp.status_code = api.status_codes.HTTP_301
+            resp.status_code = api.status_codes.HTTP_400
             return
         with SessionManager() as session:
             session.query(Signet).filter(Signet.signet_id==data['signet_id']).delete()
@@ -47,7 +47,7 @@ class SignetCommentView:
         data = await req.media(format='json')
         if not ('signet_id' in data.keys() and 'comment' in data.keys()):
             resp.media =  {'message': 'bad request'}
-            resp.status_code = api.status_codes.HTTP_301
+            resp.status_code = api.status_codes.HTTP_400
             return
         with SessionManager() as session:
             sig = session.query(Signet).get(data['signet_id'])
