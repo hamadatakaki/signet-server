@@ -20,7 +20,10 @@ class SignetView:
             resp.media = {'message': 'bad request','signet_id': -1}
             resp.status_code = api.status_codes.HTTP_400
             return
-        signet = Signet(url=data['url'], icon=data['icon'], title=data['title'], comment="", position=data['position'])
+        title = data['title']
+        if(len(title)>=22):
+            title = title[0:18] + "..." + title[-1]
+        signet = Signet(url=data['url'], icon=data['icon'], title=title, comment="", position=data['position'])
         with SessionManager() as session:
             session.add(signet)
             session.commit()
@@ -49,9 +52,12 @@ class SignetCommentView:
             resp.media =  {'message': 'bad request'}
             resp.status_code = api.status_codes.HTTP_400
             return
+        comment = data['comment']
+        if(len(comment)>=140):
+            comment = comment[0:136] + "..." + comment[-1]
         with SessionManager() as session:
             sig = session.query(Signet).get(data['signet_id'])
-            sig.comment = data['comment']
+            sig.comment = comment
             session.commit()
         resp.media = {'message': 'on post'}
         resp.status_code = api.status_codes.HTTP_201
