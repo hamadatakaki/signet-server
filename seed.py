@@ -9,7 +9,7 @@ if __name__=='__main__':
     signets = [
         Signet(
             url="https://www.sig.nekko/new_article/?id=0324", icon="https://www.sig.net/images/2134.jpg", 
-            title="ふぇ〜、フィッシュアンドチップスがこんなにたくさん...", comment="フッド姉さまが用意してくれたんだ...", position=1278
+            title="abcabc", comment="フッド姉さまが用意してくれたんだ...", position=1278
         ),
         Signet(
             url="https://onsen-musume.jp/character/iizaka_mahiro", 
