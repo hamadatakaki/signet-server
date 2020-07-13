@@ -16,7 +16,7 @@ class Signet(Base):
     )
     url = Column(URLType)
     icon = Column(URLType)
-    title = Column(String(22))
+    title = Column(String(30))
     comment = Column(String(140))
     position = Column(Integer)
     created_at = Column(

@@ -21,8 +21,8 @@ class SignetView:
             resp.status_code = api.status_codes.HTTP_400
             return
         title = data['title']
-        if(len(title)>=22):
-            title = title[0:18] + "..." + title[-1]
+        if (len(title) >= len(Signet.title)):
+            title = title[0:len(Signet.title)-3] + "..."
         signet = Signet(url=data['url'], icon=data['icon'], title=title, comment="", position=data['position'])
         with SessionManager() as session:
             session.add(signet)
