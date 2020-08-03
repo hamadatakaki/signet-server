@@ -27,8 +27,8 @@ class SignetView:
         with SessionManager() as session:
             session.add(signet)
             session.commit()
-            signet_id = signet.signet_id
-        resp.media = {'message': 'on post', 'signet_id': signet_id}
+            signet_json = signet.serialize()
+        resp.media = {'message': 'on post', 'signet': signet_json}
         resp.status_code = api.status_codes.HTTP_201
 
     async def on_delete(self, req, resp):
