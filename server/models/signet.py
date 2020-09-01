@@ -1,5 +1,7 @@
 from . import Base
 
+import datetime
+
 from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.sql.functions import current_timestamp
 from sqlalchemy_utils import URLType
@@ -39,6 +41,7 @@ class Signet(Base):
     __str__ = __repl__
 
     def serialize(self):
+        created_at = self.created_at
         return {
             'signet_id': self.signet_id,
             'url': self.get_url,
@@ -46,5 +49,5 @@ class Signet(Base):
             'title': self.title,
             'comment': self.comment,
             'position': self.position,
-            'created_at': str(self.created_at)
+            'created_at': str(created_at.astimezone())
         }

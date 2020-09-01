@@ -34,6 +34,7 @@ services:
       DATABASE_USER: $DBUSER 
       DATABASE_NAME: $DBNAME
       DATABASE_PASSWORD: $DBPASSWORD
+      TZ: Asia/Tokyo
     depends_on:
       - db
     volumes:
