@@ -49,5 +49,5 @@ class Signet(Base):
             'title': self.title,
             'comment': self.comment,
             'position': self.position,
-            'created_at': str(created_at.astimezone())
+            'created_at': datetime.datetime.strftime(created_at.astimezone(), '%Y-%m-%d %H:%M:%S.%f')
         }
